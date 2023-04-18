@@ -2,8 +2,8 @@
 
 ## Colaborators
 
-- Product Manager: Martin Guavera
-- Designer: Maria Craigsman
+- Product Manager: Martin Guevara
+- Designer: Mariia Kraisman
 - Developer: Emmanuel Otuonye
 - Developer: Jesse Abuaja
 
