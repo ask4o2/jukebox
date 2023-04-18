@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Feed from "../screens/Feed";
 import Post from "../screens/Post";
 import Rooms from "../screens/Rooms";
+import PostDetails from "../screens/PostDetails";
 
 const Tab = createBottomTabNavigator();
 
@@ -55,7 +56,7 @@ const TabStack = () => {
           tabBarShowLabel: false,
         }}
         name="Post"
-        component={Post}
+        component={PostDetails}
       />
 
       <Tab.Screen

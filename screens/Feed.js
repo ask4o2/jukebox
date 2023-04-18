@@ -31,9 +31,11 @@ const Feed = () => {
   return (
     <View style={tw`px-5`}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Text style={tw.style("mb-6")}>Feed</Text>
+        <Text style={tw.style("mt-6 pb-2")}>Feed</Text>
 
         {/* Feed card */}
+        <FeedCard />
+        <FeedCard />
         <FeedCard />
         <FeedCard />
         <FeedCard />
