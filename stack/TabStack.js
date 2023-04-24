@@ -7,20 +7,55 @@ import Feed from "../screens/Feed";
 import Post from "../screens/Post";
 import Rooms from "../screens/Rooms";
 import PostDetails from "../screens/PostDetails";
+import { auth } from "../firebase";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../features/user/userSlice";
+import { TouchableOpacity } from "react-native";
+import { useEffect } from "react";
 
 const Tab = createBottomTabNavigator();
 
 const TabStack = () => {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
+
+  const signOut = () => {
+    auth.signOut().catch((error) => {
+      console.log(error);
+    });
+  };
+
+  // useEffect(() => {
+  //   const unsubscribe = auth.onAuthStateChanged((user) => {
+  //     if (!user) {
+  //       dispatch(logoutUser());
+  //     }
+
+  //     return unsubscribe;
+  //   });
+  // }, []);
+
   return (
     <Tab.Navigator
       screenOptions={{
         headerLeft: () => (
           <View style={tw.style(" p-2 bg-gray-200 rounded-full ")}>
-            <AntDesign name="picture" size={18} color="black" />
+            <TouchableOpacity onPress={signOut}>
+              <AntDesign name="picture" size={18} color="black" />
+            </TouchableOpacity>
           </View>
         ),
-        headerTitle: () => <Text style={tw`text-center`}>Jukebox</Text>,
+        headerTitle: () => (
+          <Text
+            style={tw.style(`text-center text-[16px]`, {
+              fontFamily: "Quicksand-Regular",
+            })}
+          >
+            Jukebox
+          </Text>
+        ),
         headerRight: () => <Feather name="bell" size={18} color="black" />,
+        headerStyle: { backgroundColor: "#FFF3E0" },
         headerTitleAlign: "center",
         headerLeftContainerStyle: {
           paddingLeft: 15,
@@ -29,15 +64,35 @@ const TabStack = () => {
           paddingRight: 15,
         },
         tabBarStyle: {
-          backgroundColor: "lightgray",
+          backgroundColor: "#FFDCA2",
+          height: 50,
         },
       }}
     >
       <Tab.Screen
         options={{
-          tabBarIcon: () => (
-            <View style={tw.style("bg-gray-200 p-3 rounded-full")}>
-              <AntDesign name="home" size={16} color="black" />
+          tabBarIcon: ({ focused }) => (
+            <View
+              style={tw.style(
+                `flex-row gap-[5px] items-center ${
+                  focused ? "bg-white" : "bg-transparent"
+                } py-[5px] px-[15px] rounded-full`
+              )}
+            >
+              <MaterialCommunityIcons
+                name="home-outline"
+                size={24}
+                color="black"
+              />
+              {focused && (
+                <Text
+                  style={tw.style("text-[11px]", {
+                    fontFamily: "Quicksand-Medium",
+                  })}
+                >
+                  Home
+                </Text>
+              )}
             </View>
           ),
           tabBarShowLabel: false,
@@ -48,9 +103,24 @@ const TabStack = () => {
 
       <Tab.Screen
         options={{
-          tabBarIcon: () => (
-            <View style={tw.style("bg-gray-200 p-3 rounded-full")}>
-              <AntDesign name="plus" size={16} color="black" />
+          tabBarIcon: ({ focused }) => (
+            <View
+              style={tw.style(
+                `flex-row gap-[5px] items-center ${
+                  focused ? "bg-white" : "bg-transparent"
+                } py-[5px] px-[15px] rounded-full`
+              )}
+            >
+              <AntDesign name="pluscircleo" size={20} color="black" />
+              {focused && (
+                <Text
+                  style={tw.style("text-[11px]", {
+                    fontFamily: "Quicksand-Medium",
+                  })}
+                >
+                  Create
+                </Text>
+              )}
             </View>
           ),
           tabBarShowLabel: false,
@@ -61,13 +131,24 @@ const TabStack = () => {
 
       <Tab.Screen
         options={{
-          tabBarIcon: () => (
-            <View style={tw.style("bg-gray-200 p-3 rounded-full")}>
-              <MaterialCommunityIcons
-                name="music-rest-sixteenth"
-                size={16}
-                color="black"
-              />
+          tabBarIcon: ({ focused }) => (
+            <View
+              style={tw.style(
+                `flex-row gap-[5px] items-center ${
+                  focused ? "bg-white" : "bg-transparent"
+                } py-[5px] px-[15px] rounded-full`
+              )}
+            >
+              <MaterialCommunityIcons name="music" size={24} color="black" />
+              {focused && (
+                <Text
+                  style={tw.style("text-[11px]", {
+                    fontFamily: "Quicksand-Medium",
+                  })}
+                >
+                  Rooms
+                </Text>
+              )}
             </View>
           ),
           tabBarShowLabel: false,
