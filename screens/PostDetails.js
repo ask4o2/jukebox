@@ -1,12 +1,17 @@
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import tw from "twrnc";
 import { Switch } from "react-native-paper";
 import Indicator from "../components/Indicator";
+import { Image } from "react-native";
 
-const PostDetails = () => {
+const PostDetails = ({ navigation, route }) => {
+  const { post } = route.params;
+  // console.log(post);
+
   const [isSwitchOn, setIsSwitchOn] = useState(false);
+  const [postText, setPostText] = useState("");
 
   const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
 
@@ -23,22 +28,19 @@ const PostDetails = () => {
   return (
     <View style={tw.style("flex-1 bg-white")}>
       <View style={tw.style("flex-row p-3")}>
-        <AntDesign name="arrowleft" size={20} color="black" />
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <AntDesign name="arrowleft" size={20} color="black" />
+        </TouchableOpacity>
         <Text style={tw.style("flex-1 text-center")}>Add more details</Text>
       </View>
 
       <View style={tw.style("flex-row p-3 bg-gray-300 items-center")}>
         <View style={tw.style("h-18 w-18 bg-gray-200 ")}>
-          <AntDesign
-            name="picture"
-            size={28}
-            color="black"
-            style={tw`my-auto mx-auto`}
-          />
+          <Image source={{ uri: post.image }} style={tw.style("h-18 w-18")} />
         </View>
         <View style={tw.style("ml-4")}>
-          <Text style={tw.style("text-base")}>Unavailable </Text>
-          <Text>Davido</Text>
+          <Text style={tw.style("text-sm font-bold")}>{post.name} </Text>
+          <Text style={tw`text-gray-600`}>{post.artists}</Text>
         </View>
       </View>
 
@@ -48,6 +50,8 @@ const PostDetails = () => {
         </Text>
 
         <TextInput
+          value={postText}
+          onChangeText={(text) => setPostText(text)}
           placeholder="Start typing here..."
           textAlignVertical="top"
           numberOfLines={4}

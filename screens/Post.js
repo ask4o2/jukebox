@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import tw from "twrnc";
 import { AntDesign } from "@expo/vector-icons";
@@ -15,6 +15,9 @@ import ArtistCard from "../components/ArtistCard";
 import PlaylistCard from "../components/PlaylistCard";
 
 const Post = ({ navigation, route }) => {
+  // component state for selected post details
+  const [selectedPost, setSelectedPost] = useState(null);
+
   const { data } = route.params;
 
   // convert data object to array
@@ -114,6 +117,12 @@ const Post = ({ navigation, route }) => {
     newData.filter((item) => item.tracks)
   );
 
+  // handle selected post
+  const handlePostSelect = (data) => {
+    setSelectedPost(data);
+    navigation.navigate("postDetails", { post: data });
+  };
+
   const SearchTag = ({ text, active }) => (
     <View
       style={tw.style(
@@ -161,19 +170,39 @@ const Post = ({ navigation, route }) => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={tw.style("px-4 pb-4 gap-4")}>
           {option === "tracks" &&
-            currentData?.map((item) => <TrackCard item={item} key={item.id} />)}
+            currentData?.map((item) => (
+              <TrackCard
+                handlePostSelect={handlePostSelect}
+                item={item}
+                key={item}
+              />
+            ))}
 
           {option === "albums" &&
-            currentData?.map((item) => <AlbumCard item={item} key={item.id} />)}
+            currentData?.map((item) => (
+              <AlbumCard
+                handlePostSelect={handlePostSelect}
+                item={item}
+                key={item}
+              />
+            ))}
 
           {option === "artists" &&
             currentData?.map((item) => (
-              <ArtistCard item={item} key={item.id} />
+              <ArtistCard
+                handlePostSelect={handlePostSelect}
+                item={item}
+                key={item}
+              />
             ))}
 
           {option === "playlists" &&
             currentData?.map((item) => (
-              <PlaylistCard item={item} key={item.id} />
+              <PlaylistCard
+                handlePostSelect={handlePostSelect}
+                item={item}
+                key={item}
+              />
             ))}
         </View>
       </ScrollView>

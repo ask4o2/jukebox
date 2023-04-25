@@ -5,8 +5,9 @@ import { AntDesign, Feather } from "@expo/vector-icons";
 import tw from "twrnc";
 import { Audio } from "expo-av";
 import useAuth from "../hooks/useAuth";
+import FeedCard from "../components/FeedCard";
 
-const Feed = () => {
+const Feed = ({}) => {
   let soundObject = null;
 
   // get playback status
@@ -72,53 +73,27 @@ const Feed = () => {
     console.log("song paused..");
   };
 
-  const FeedCard = () => (
-    <View style={tw.style("my-2")}>
-      <View
-        style={tw.style("flex-row p-3 bg-gray-200 rounded-t-xl items-center")}
-      >
-        <Feather name="music" size={18} color="gray" />
-        <View style={tw.style("flex-1 pl-4")}>
-          <Text>Unavailable</Text>
-          <Text>Davido, Timeless</Text>
-        </View>
-      </View>
-
-      {/* <View> */}
-      <Image
-        style={tw.style("w-full h-[300px] rounded-b-xl")}
-        source={{
-          uri: "https://media.premiumtimesng.com/wp-content/files/2023/03/Davido-Timeless-album-cover.jpg",
-        }}
-      />
-      {/* </View> */}
-
-      {/* play sound */}
-      <TouchableOpacity onPress={playSound}>
-        <Text style={tw`p-3 text-center mt-2 border w-30 rounded-full`}>
-          Play sound
-        </Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={pauseSound}>
-        <Text style={tw`p-3 text-center mt-2 border w-30 rounded-full`}>
-          Pause sound
-        </Text>
-      </TouchableOpacity>
-    </View>
-  );
-
   return (
     <View style={tw`px-5`}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Text style={tw.style("mt-6 pb-2")}>Feed</Text>
 
         {/* Feed card */}
-        <FeedCard />
-        <FeedCard />
-        <FeedCard />
-        <FeedCard />
-        <FeedCard />
+        <FeedCard
+          feed={{
+            artists: "Musa Keys ft Loui ",
+            image:
+              "https://i.scdn.co/image/ab67616d0000b273b68ffd51698d87a617e1a0c0",
+            name: "Selema (Po Po)",
+            preview_url:
+              "https://p.scdn.co/mp3-preview/06082a22a29c11ecf1157d6efc6645bbc5aa825b?cid=74537f4101bc425db9b424fd8324cab3",
+            url: "https://open.spotify.com/track/1bnWGzdaZw0FPZddeGk9yv",
+          }}
+        />
+        <FeedCard feed={{}} />
+        <FeedCard feed={{}} />
+        <FeedCard feed={{}} />
+        <FeedCard feed={{}} />
       </ScrollView>
     </View>
   );
