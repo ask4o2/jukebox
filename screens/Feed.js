@@ -46,7 +46,7 @@ const Feed = ({}) => {
     }
   };
 
-  const playSound = async () => {
+  const playSound = async (uri) => {
     if (soundObject === null) {
       soundObject = new Audio.Sound();
       console.log("play pressed...");
@@ -55,7 +55,7 @@ const Feed = ({}) => {
 
       try {
         await soundObject.loadAsync({
-          uri: "https://p.scdn.co/mp3-preview/f4b21794b26cd51251d3f537eeb0c3d8b6d8a811?cid=74537f4101bc425db9b424fd8324cab3",
+          uri: uri,
         });
 
         soundObject.playAsync();
@@ -89,11 +89,54 @@ const Feed = ({}) => {
               "https://p.scdn.co/mp3-preview/06082a22a29c11ecf1157d6efc6645bbc5aa825b?cid=74537f4101bc425db9b424fd8324cab3",
             url: "https://open.spotify.com/track/1bnWGzdaZw0FPZddeGk9yv",
           }}
+          playSound={playSound}
+          pauseSound={pauseSound}
         />
-        <FeedCard feed={{}} />
-        <FeedCard feed={{}} />
-        <FeedCard feed={{}} />
-        <FeedCard feed={{}} />
+
+        {/* Feed card */}
+        <FeedCard
+          feed={{
+            artists: " Davido ft Musa Keys  ",
+            image:
+              "https://i.scdn.co/image/ab67616d0000b273adfc1ac5836f96adac580271",
+            name: "UNAVAILABLE (feat. Musa Keys)",
+            preview_url:
+              "https://p.scdn.co/mp3-preview/f4b21794b26cd51251d3f537eeb0c3d8b6d8a811?cid=74537f4101bc425db9b424fd8324cab3",
+            url: "https://open.spotify.com/track/1bnWGzdaZw0FPZddeGk9yv",
+          }}
+          playSound={playSound}
+          pauseSound={pauseSound}
+        />
+
+        {/* Feed card */}
+        <FeedCard
+          feed={{
+            artists: "Musa Keys ft Loui ",
+            image:
+              "https://i.scdn.co/image/ab67616d0000b273b68ffd51698d87a617e1a0c0",
+            name: "Selema (Po Po)",
+            preview_url:
+              "https://p.scdn.co/mp3-preview/06082a22a29c11ecf1157d6efc6645bbc5aa825b?cid=74537f4101bc425db9b424fd8324cab3",
+            url: "https://open.spotify.com/track/1bnWGzdaZw0FPZddeGk9yv",
+          }}
+          playSound={playSound}
+          pauseSound={pauseSound}
+        />
+
+        {/* Feed card */}
+        <FeedCard
+          feed={{
+            artists: "Musa Keys ft Loui ",
+            image:
+              "https://i.scdn.co/image/ab67616d0000b273b68ffd51698d87a617e1a0c0",
+            name: "Selema (Po Po)",
+            preview_url:
+              "https://p.scdn.co/mp3-preview/06082a22a29c11ecf1157d6efc6645bbc5aa825b?cid=74537f4101bc425db9b424fd8324cab3",
+            url: "https://open.spotify.com/track/1bnWGzdaZw0FPZddeGk9yv",
+          }}
+          playSound={playSound}
+          pauseSound={pauseSound}
+        />
       </ScrollView>
     </View>
   );
